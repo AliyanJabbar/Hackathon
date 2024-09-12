@@ -84,7 +84,7 @@ document.querySelector("#genRes")?.addEventListener("click", () => {
           // Generating resume HTML to append
           return `
           <!-- Left Side -->
-          <div class="leftSide">
+          <div contenteditable="true" class="leftSide">
             <!-- personal Information -->
             <div class="personalInfo">
             <!-- Image in personal Info -->
@@ -110,9 +110,9 @@ document.querySelector("#genRes")?.addEventListener("click", () => {
           </div>
       
           <!-- Right Side -->
-          <div class="rightSide">
+          <div contenteditable="true" class="rightSide">
             <div class="about">
-              <h2 id="aboutHead">About</h2>
+              <h2 id="about">About</h2>
               <p>
               ${personalInfo.about}
                 </p>
@@ -128,9 +128,9 @@ document.querySelector("#genRes")?.addEventListener("click", () => {
             <!-- Work -->
             <div class="work">
               <h2 id="work">Work Experience</h2>
-              <p> ${workExperience.position}
+              <p> ${workExperience.company}
                 <br>
-                ${workExperience.company}<br>
+                ${workExperience.position}<br>
                  (${workExperience.startYear} - ${workExperience.endYear}) <br>
                 <br>
                 </p>
