@@ -1,45 +1,44 @@
-/* Styling for the entire body */
-
+/* Main container for the generated resume */
 #generatedResume {
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     display: grid;
     grid-template-columns: 30% 70%;
-    border: 5px solid rgb(255, 255, 255);
+    border: 5px solid white;
     border-radius: 15px;
     box-shadow: 5px 5px 10px 15px gray;
     width: 800px;
     margin: 50px auto;
 }
-img{
-    width: 150px;
-    height: 150px;
-    border: 5px solid black;
-    border-radius: 50%; 
-    margin: 5px auto;
 
-}
-
-/* Styling for the right side of the layout */
-.rightSide {
-    margin-left: 50px;
-}
-
-/* Styling for the left side of the layout */
+/* Styling for the left column of the resume */
 .leftSide {
     background-color: hsl(85, 81%, 27%);
     padding: 90px 30px;
 }
 
+/* Styling for the right column of the resume */
+.rightSide {
+    margin-left: 50px;
+}
+
+/* Styling for the profile picture */
+img {
+    width: 150px;
+    height: 150px;
+    border: 5px solid black;
+    border-radius: 50%; 
+    margin: 5px auto;
+}
+
 /* Styling for the name section */
 .name {
     text-align: center;
-    color: rgb(255, 255, 255);
-    font-family:'Segoe UI'
+    color: white;
+    font-family: 'Segoe UI';
 }
 
-/* Styling for contact details */
+/* Styling for contact information */
 .contactDetails {
-    overflow: hidden;
     text-align: center;
     font-size: 110%;
     color: rgba(255, 255, 255, 0.915);
@@ -67,70 +66,47 @@ img{
     background-color: rgb(251, 0, 255);
 }
 
-/* Styling for education header */
-#edu {
+/* Common styling for all headers in generated Resume */
+#generatedResume h2{
     text-decoration: underline;
     text-decoration-color: green;
 }
 
-/* Styling for education section */
-.edu {
+/* Margin for main content sections */
+.edu, .work, .about {
     margin: 50px 0px;
 }
 
-/* Styling for work experience header */
-#work {
-    text-decoration: underline;
-    text-decoration-color: green;
-}
-
-/* Styling for work experience section */
-.work {
-    margin: 50px 0px;
-}
-#about{
-    text-decoration: underline;
-    text-decoration-color: green ;
-}
-/* Styling for about section */
-.about {
-    margin: 50px 0px;
-}
-
-/* removing text decoration from about section */
-#about{
-    text-decoration: none;
-}
-
-#aboutHead{
-    text-decoration: underline;
-    text-decoration-color: green ;
-}
-
-/* Mobile Responsive Styling */
+/* Mobile Responsive Design */
 @media (max-width: 768px) {
-    body {
-        grid-template-columns: 1fr; /* Single column layout */
+    /* Switch to single column layout for mobile */
+    #generatedResume {
+        grid-template-columns: 1fr;
     }
 
+    /* Adjust padding for left side on mobile */
     .leftSide {
-        padding: 30px; /* Adjust padding */
+        padding: 30px;
     }
 
+    /* Reduce left margin for right side on mobile */
     .rightSide {
-        margin-left: 5px; /* Remove margin for mobile */
+        margin-left: 5px;
     }
 
+    /* Adjust font size and margin for skills on mobile */
     .skills {
-        font-size: 90%; /* Reduce font size */
-        margin: 10px auto; /* Adjust margins */
+        font-size: 90%;
+        margin: 10px auto;
     }
 
+    /* Adjust font size for contact details on mobile */
     .contactDetails {
-        font-size: 100%; /* Adjust font size */
+        font-size: 100%;
     }
 
+    /* Reduce margin for content sections on mobile */
     .edu, .work, .about {
-        margin: 30px 0px; /* Reduce margin spacing */
+        margin: 30px 0px;
     }
 }
