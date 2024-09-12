@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Resume Builder</title>
+    <link rel="stylesheet" href="./styles/formStyle.css" />
+    <link rel="stylesheet" href="./styles/styleForGeneratedResume.css" />
+  </head>
+  <body>
+    <div class="mainDiv">
+      <h1 id="head1">Dynamic Resume Builder</h1>
+      <form id="form">
+        <div id="personalInfo">
+          <fieldset>
+            <!-- Personal Information -->
+            <legend><h2>Personal Information</h2></legend>
+            <!-- for Name -->
+            <label for="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Your Name Here..."
+              required
+            />
+            <hr />
+            <br />
+            <!-- for Email -->
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Your Email Here..."
+              accept="email/*"
+              required
+            />
+            <br />
+            <hr />
+            <label for="userImage">Resume Image:</label>
+            <input type="file" id="userImage" accept="Image/*" required/>
+            <br />
+            <hr />
+            <!-- for Phone Number -->
+            <label for="number">Number:</label>
+            <input
+              type="tel"
+              id="number"
+              placeholder="+92 2342348092"
+              required
+            />
+            <br />
+            <hr />
+            <!-- for about -->
+            <label for="about">About:</label><br />
+            <textarea name="about" id="about" cols="50" rows="10"></textarea>
+          </fieldset>
+        </div>
+        <div id="education">
+          <fieldset>
+            <!-- Education -->
+            <legend><h2>Education</h2></legend>
+            <!-- for Institute -->
+            <label for="Institute">Institute:</label>
+            <input
+              type="text"
+              id="Institute"
+              placeholder="Your Institute Name Here..."
+              required
+            /><br />
+            <hr />
+            <!-- for Degree -->
+            <label for="Degree">Degree:</label>
+            <input
+              type="text"
+              id="Degree"
+              placeholder="Your Degree Name Here..."
+              required
+            />
+            <br />
+            <hr />
+            <!-- for Time Period (Start Time) -->
+            <label for="startYear">Start-Year:</label>
+            <input
+              type="number"
+              id="startYear"
+              min="1900"
+              max="2030"
+              value="2024"
+              required
+            /><br />
+            <hr />
+            <!-- for Time Period (End Time) -->
+            <label for="endYear">End-Year or Expected:</label>
+            <input
+              type="number"
+              id="endYear"
+              min="1900"
+              max="2030"
+              value="2024"
+              required
+            />
+            <br />
+          </fieldset>
+        </div>
+        <div id="exp">
+          <fieldset>
+            <!-- Work Experience -->
+            <legend><h2>Work Experience</h2></legend>
+            <!-- fon Company -->
+            <label for="company">Company:</label>
+            <input
+              type="text"
+              id="company"
+              placeholder="Your Company Here..."
+              required
+            />
+            <br />
+            <hr />
+            <!-- for Position -->
+            <label for="position">Position (As A):</label>
+            <input
+              type="text"
+              id="position"
+              placeholder="Manager..."
+              required
+            />
+            <br />
+            <hr />
+            <!-- for period (start year) -->
+            <label for="startYearComp">Start Year:</label>
+            <input
+              type="number"
+              id="startYearComp"
+              max="2024"
+              min="1900"
+              value="2024"
+              required
+            />
+            <br />
+            <hr />
+            <!-- for period (end year) -->
+            <label for="endYearComp">End year or Expected:</label>
+            <input
+              type="number"
+              id="endYearComp"
+              max="2030"
+              min="1900"
+              value="2024"
+              required
+            />
+          </fieldset>
+        </div>
+        <div id="SkillsSec">
+          <fieldset>
+            <!-- Skills -->
+            <legend><h2>Skills</h2></legend>
+            <label for="Skills">Skills:</label>
+            <input
+              type="text"
+              id="Skills"
+              placeholder="Your Skills..."
+              required
+            />
+          </fieldset>
+        </div>
+        <div id="genRes">Generate Resume</div>
+      </form>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
