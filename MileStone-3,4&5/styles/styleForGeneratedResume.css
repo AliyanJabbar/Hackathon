@@ -102,6 +102,11 @@ img{
     text-decoration: none;
 }
 
+#aboutHead{
+    text-decoration: underline;
+    text-decoration-color: green ;
+}
+
 /* Mobile Responsive Styling */
 @media (max-width: 768px) {
     body {

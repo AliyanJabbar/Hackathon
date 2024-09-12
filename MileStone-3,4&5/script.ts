@@ -112,7 +112,7 @@ document.querySelector("#genRes")?.addEventListener("click", () => {
           <!-- Right Side -->
           <div contenteditable="true" class="rightSide">
             <div class="about">
-              <h2 id="about">About</h2>
+              <h2 id="aboutHead">About</h2>
               <p>
               ${personalInfo.about}
                 </p>
