@@ -18,7 +18,7 @@
 
 /* Styling for the right column of the resume */
 .rightSide {
-    margin-left: 50px;
+    margin: 50px;
 }
 
 /* Styling for the profile picture */
@@ -77,6 +77,32 @@ img {
     margin: 50px 0px;
 }
 
+
+#DownloadBtn , #ResumeLink{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    border: 5px solid blue;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 25px auto;
+    height: 40px;
+    width: 200px;
+    cursor: pointer;
+    box-shadow: none;
+    font-size: medium;
+    transition-property: width, box-shadow, height, font-size;
+    transition-duration: 1s;
+}
+
+  #DownloadBtn:hover , #ResumeLink:hover{
+    width: 230px;
+    height: 50px;
+    box-shadow: 3px 3px 10px 10px gray;
+    font-size: 18.5px;
+  }
+
+ 
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
     /* Switch to single column layout for mobile */
