@@ -1,0 +1,62 @@
+
+/* all links  */
+.socialLinks{
+    margin: 0px 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* styling social media icons */
+  .fa {
+    margin-top: 5px;
+    padding: 10px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    transform: scale(1.5);
+    transition-property: margin-top;
+    transition-duration: 0.3s;
+  }
+  
+  .fa:hover{
+  opacity: 0.7;
+  margin-top: 0px;
+  }
+  
+  .fa-whatsapp {
+    background-color: green;
+    color: white;
+  }
+  
+  .fa-facebook{
+    background-color: blue;
+    color: white;
+  }
+  
+  .fa-envelope{
+    background-color: black;
+    color: white;
+  }
+  
+  .fa-linkedin{
+    background-color: rgb(28, 144, 176);
+    color: white;
+  }
+  
+  .fa-github{
+    background-color: purple;
+    color: white;
+  }
+  
+  .fa-discord{
+    background-color: rgb(20, 82, 188);
+    color: white;
+    padding-right: 12px;
+    padding-left: 8px;
+  }
+  

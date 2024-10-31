@@ -1,0 +1,69 @@
+
+/* skills distance maintaining */
+#html, #css , #js , #ts , #nextjs , #reactjs , #tailwind{
+    margin: 20px auto;
+  }
+  
+  /* skills animations and css */
+  .htmlSkill, .cssSkill , .jsSkill, .tsSkill, .nextjsSkill, .reactjsSkill, .tailwindSkill{
+    display: flex;
+    justify-content: space-between;
+  }
+  /* common for all skills */
+  .htmlSkillBar, .cssSkillBar, .jsSkillBar, .tsSkillBar , .nextjsSkillBar, .reactjsSkillBar, .tailwindSkillBar{
+   width: 100%;
+   background-color: white;
+   border-radius: 50px;
+   height: 10px;
+  }
+  /* for skills I have experties 90% */
+  .htmlSkillBarLength , .tsSkillBarLength, .tailwindSkillBarLength{
+    background-color: blue;
+    height: 10px;
+    border-radius: 50px;
+    animation: bar-90 3s ease-in-out forwards;
+  }
+  /* for skills I have experties 75% */
+  .cssSkillBarLength, .reactjsSkillBarLength {
+    background-color: blue;
+    height: 10px;
+    border-radius: 50px;
+    animation: bar-75 3s ease-in-out forwards;
+  }
+  /* for skills I have experties 80% */
+  .jsSkillBarLength, .nextjsSkillBarLength{
+    background-color: blue;
+    height: 10px;
+    border-radius: 50px;
+    animation: bar-80 3s ease-in-out forwards;
+  }
+  
+  /* animation for 90% */
+  @keyframes bar-90 {
+    0%{
+      width: 0%;
+    }
+    100%{
+      width: 90%;
+    }
+  }
+  
+  /* animation for 80% */
+  @keyframes bar-80 {
+    0%{
+      width: 0%;
+    }
+    100%{
+      width: 80%;
+    }
+  }
+  
+  /* animation for 75% */
+  @keyframes bar-75 {
+    0%{
+      width: 0%;
+    }
+    100%{
+      width: 75%;
+    }
+  }
