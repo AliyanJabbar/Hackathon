@@ -4,44 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynamic Resume Builder</title>
+    <!-- css -->
+    <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/formStyle.css" />
     <link rel="stylesheet" href="./styles/styleForGeneratedResume.css" />
+    <!-- icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="mainDiv">
       <h1 id="head1">Dynamic Resume Builder</h1>
       <form id="form">
-        <div id="personalInfo">
+        <div class="field" id="personalInfo">
           <fieldset>
             <!-- Personal Information -->
             <legend><h2>Personal Information</h2></legend>
-            <!-- for Name -->
-            <label for="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Your Name Here..."
-              required
-            />
-            <hr />
+            <label for="fname">First Name:</label>
             <br />
-            <!-- for Email -->
+            <input type="text" id="fname" placeholder="Muhammad" required />
+            <hr />
+            <label for="lname">Last Name:</label>
+            <br />
+            <input type="text" id="lname" placeholder="Ali" required />
+            <hr />
+            <label for="prof">Profession:</label>
+            <br />
+            <input type="text" id="prof" placeholder="Web Developer" required />
+            <br />
+            <hr />
             <label for="email">Email:</label>
+            <br />
             <input
               type="email"
               id="email"
-              placeholder="Your Email Here..."
+              placeholder="Your Email Here.."
               accept="email/*"
               required
             />
             <br />
             <hr />
-            <label for="userImage">Resume Image:</label>
-            <input type="file" id="userImage" accept="Image/*" required />
-            <br />
-            <hr />
-            <!-- for Phone Number -->
             <label for="number">Number:</label>
+            <br />
             <input
               type="tel"
               id="number"
@@ -50,122 +56,149 @@
             />
             <br />
             <hr />
-            <!-- for about -->
+            <label for="userImage">Resume Image:</label>
+            <br />
+            <input type="file" id="userImage" accept="Image/*" required />
+            <br />
+            <hr />
             <label for="about">About:</label><br />
-            <textarea name="about" id="about" cols="50" rows="10"></textarea>
+            <div class="textarea-div">
+              <textarea
+                name="about"
+                id="about"
+                rows="10"
+                placeholder="Shortly Describe About Yourself"
+              ></textarea>
+            </div>
           </fieldset>
         </div>
-        <div id="education">
+
+        <div class="field" id="edu">
           <fieldset>
-            <!-- Education -->
             <legend><h2>Education</h2></legend>
-            <!-- for Institute -->
-            <label for="Institute">Institute:</label>
-            <input
-              type="text"
-              id="Institute"
-              placeholder="Your Institute Name Here..."
-              required
-            /><br />
-            <hr />
-            <!-- for Degree -->
-            <label for="Degree">Degree:</label>
-            <input
-              type="text"
-              id="Degree"
-              placeholder="Your Degree Name Here..."
-              required
-            />
-            <br />
-            <hr />
-            <!-- for Time Period (Start Time) -->
-            <label for="startYear">Start-Year:</label>
-            <input
-              type="number"
-              id="startYear"
-              min="1900"
-              max="2030"
-              value="2024"
-              required
-            /><br />
-            <hr />
-            <!-- for Time Period (End Time) -->
-            <label for="endYear">End-Year or Expected:</label>
-            <input
-              type="number"
-              id="endYear"
-              min="1900"
-              max="2030"
-              value="2024"
-              required
-            />
-            <br />
+            <div id="education-container">
+              <div class="education-entry entry">
+                <label for="title-edu">Title:</label>
+                <br />
+                <input
+                  type="text"
+                  id="Title-edu"
+                  placeholder="Your Institute and Degree Here..."
+                  required
+                />
+                <hr />
+                <label for="description-edu">Description:</label>
+                <br />
+                <input
+                  type="text"
+                  id="Description-edu"
+                  placeholder="Shortly Describe What you've learned"
+                  required
+                />
+                <br />
+                <hr />
+                <label for="Date-edu">Date:</label>
+                <br />
+                <input
+                  type="text"
+                  id="date-edu"
+                  placeholder="1999-2014"
+                  required
+                />
+              </div>
+            </div>
+            <button type="button" id="add-education" class="add-more-btn">
+              Add More Education
+            </button>
           </fieldset>
         </div>
-        <div id="exp">
+
+        <div class="field" id="exp">
           <fieldset>
-            <!-- Work Experience -->
             <legend><h2>Work Experience</h2></legend>
-            <!-- fon Company -->
-            <label for="company">Company:</label>
-            <input
-              type="text"
-              id="company"
-              placeholder="Your Company Here..."
-              required
-            />
-            <br />
-            <hr />
-            <!-- for Position -->
-            <label for="position">Position (As A):</label>
-            <input
-              type="text"
-              id="position"
-              placeholder="Manager..."
-              required
-            />
-            <br />
-            <hr />
-            <!-- for period (start year) -->
-            <label for="startYearComp">Start Year:</label>
-            <input
-              type="number"
-              id="startYearComp"
-              max="2024"
-              min="1900"
-              value="2024"
-              required
-            />
-            <br />
-            <hr />
-            <!-- for period (end year) -->
-            <label for="endYearComp">End year or Expected:</label>
-            <input
-              type="number"
-              id="endYearComp"
-              max="2030"
-              min="1900"
-              value="2024"
-              required
-            />
+            <div id="experience-container">
+              <div class="experience-entry entry">
+                <label for="title-exp">Job Title:</label>
+                <br />
+                <input
+                  type="text"
+                  id="Title-exp"
+                  placeholder="Code Alpha"
+                  required
+                />
+                <hr />
+                <label for="description-exp">Description:</label>
+                <br />
+                <input
+                  type="text"
+                  id="Description-exp"
+                  placeholder="Shortly Describe Your Role there"
+                  required
+                />
+                <hr />
+                <label for="date-exp">Date:</label>
+                <br />
+                <input
+                  type="text"
+                  id="Date-exp"
+                  placeholder="1999-2014"
+                  required
+                />
+              </div>
+            </div>
+            <button type="button" id="add-experience" class="add-more-btn">
+              Add More Experience
+            </button>
           </fieldset>
         </div>
-        <div id="SkillsSec">
+
+        <div class="field" id="ServicesSec">
           <fieldset>
-            <!-- Skills -->
-            <legend><h2>Skills</h2></legend>
-            <label for="Skills">Skills:</label>
-            <input
-              type="text"
-              id="Skills"
-              placeholder="Your Skills..."
-              required
-            />
+            <legend><h2>Services</h2></legend>
+            <div id="services-container">
+              <div class="service-entry entry">
+                <label>Services:</label>
+                <input
+                  type="text"
+                  class="services"
+                  id="service"
+                  placeholder="Your Service"
+                  required
+                />
+              </div>
+            </div>
+            <button type="button" id="add-service" class="add-more-btn">
+              Add More Services
+            </button>
           </fieldset>
         </div>
+
+        <div class="field" id="SkillsSec">
+          <fieldset>
+            <legend><h2>Skills</h2></legend>
+            <div id="skills-container">
+              <div class="skill-entry entry">
+                <label>Skills:</label>
+                <input
+                  type="text"
+                  class="skills"
+                  id="Skill"
+                  placeholder="Your Skill"
+                  required
+                />
+              </div>
+            </div>
+            <button type="button" id="add-skill" class="add-more-btn">
+              Add More Skills
+            </button>
+          </fieldset>
+        </div>
+
         <div id="genRes">Generate Resume</div>
       </form>
     </div>
-    <script src="./script.js"></script>
+    <!-- container for generated resume -->
+    <div id="resumeContainer"></div>
+    <script src="script.js"></script>
   </body>
 </html>

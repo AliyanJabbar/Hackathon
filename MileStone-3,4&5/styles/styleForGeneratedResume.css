@@ -1,138 +1,249 @@
-/* Main container for the generated resume */
+@import url("https://fonts.googleapis.com/css2?family=Monsterrat&display=swap");
+
 #generatedResume {
-    background-color: white;
-    display: grid;
-    grid-template-columns: 30% 70%;
-    border: 5px solid white;
-    border-radius: 15px;
-    box-shadow: 5px 5px 10px 15px gray;
-    width: 800px;
-    margin: 50px auto;
+  display: block;
+  margin: 0px 435px;
+  height: 190vh;
+}
+.main {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  margin: 150px 0;
+  background-color: white;
+  height: fit-content;
+  width: 650px;
+  box-shadow: 0px 0px 40px 15px rgb(37, 36, 36);
+  z-index: 0;
 }
 
-/* Styling for the left column of the resume */
-.leftSide {
-    background-color: hsl(85, 81%, 27%);
-    padding: 90px 30px;
+/* left side */
+.left {
+  padding: 20px 0;
+  background-color: var(--first-main-color);
+  height: 400px;
+  width: 200px;
+  height: 100%;
+  min-height: 120vh;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
-/* Styling for the right column of the resume */
-.rightSide {
-    margin: 50px;
+.profile-img {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  background-color: var(--first-main-color);
+  border-radius: 50%;
+  margin-bottom: 20px;
+  margin-left: 60px;
+  border: 10px solid var(--first-main-color);
+  box-shadow: 0px 0px 0px 3px var(--first-main-color);
 }
 
-/* Styling for the profile picture */
-img {
-    width: 150px;
-    height: 150px;
-    border: 5px solid black;
-    border-radius: 50%; 
-    margin: 5px auto;
+.profile-img img {
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: 0px 0px 50px 10px var(--first-main-color);
 }
 
-/* Styling for the name section */
-.name {
-    text-align: center;
-    color: white;
-    font-family: 'Segoe UI';
+.box-1 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
 }
 
-/* Styling for contact information */
-.contactDetails {
-    text-align: center;
-    font-size: 110%;
-    color: rgba(255, 255, 255, 0.915);
+.heading {
+  background-color: var(--second-main-color);
+  color: var(--first-main-color);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  height: 40px;
+  padding: 1px;
+  margin: 0px -15px 10px 0px;
+}
+.heading p {
+  display: block;
+  margin: 7px 20px;
+}
+.heading::after {
+  content: "";
+  position: absolute;
+  width: 21px;
+  height: 18px;
+  background-color: var(--second-main-color);
+  left: 191px;
+  top: 30px;
+  transform: rotate(56deg);
+  z-index: -1;
 }
 
-/* Styling for the skills section */
-.skills {
-    color: white;
-    padding: 10px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    text-align: center;
-    border: 5px solid rgb(150, 24, 140);
-    border-radius: 20px;
-    background-color: rgb(251, 0, 255);
-    margin: 20px auto;
+.p1 {
+  padding: 9px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
-/* Hover effect for skills section */
-.skills:hover {
-    background-color: rgb(142, 56, 144);
+.service .p1 {
+  cursor: default;
+  padding: 7px;
+  text-wrap: nowrap;
+  text-align: center;
+  width: fit-content;
+  border: 2px solid black;
+  border-radius: 15px;
+  margin: 4px;
+  background-color: rgb(250, 232, 38);
+  transition: all 0.3s ease-in-out;
+}
+.service .p1:hover {
+  transform: translateX(5px);
 }
 
-/* Active state for skills section */
-.skills:active {
-    background-color: rgb(251, 0, 255);
+.icons1 {
+  font-size: 16px !important;
+  padding-right: 10px;
+  vertical-align: sub; /* for alignment */
 }
 
-/* Common styling for all headers in generated Resume */
-#generatedResume h2{
-    text-decoration: underline;
-    text-decoration-color: green;
+.skills-container {
+  width: 90%;
+  transform: translateX(-8.5px);
+  margin: 0px 10px;
+  border-radius: 10px;
+  background-color: rgb(66, 66, 66);
+}
+.skill {
+  text-align: left;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: white;
+  border-radius: 10px;
+}
+.skill-0 {
+  width: 90%;
+  background-color: white;
+}
+.skill-1 {
+  width: 70%;
+  background-color: white;
+}
+.skill-2 {
+  width: 90%;
+  background-color: white;
+}
+.skill-3 {
+  width: 80%;
+  background-color: white;
+}
+.skill-4 {
+  width: 90%;
+  background-color: white;
+}
+.skill-5 {
+  width: 70%;
+  background-color: white;
+}
+.skill-6 {
+  width: 90%;
+  background-color: white;
 }
 
-/* Margin for main content sections */
-.edu, .work, .about {
-    margin: 50px 0px;
+/* right side  */
+
+.right {
+  width: 450px;
+  float: left;
+  padding: 0 50px;
 }
 
-
-#DownloadBtn , #ResumeLink{
-    text-decoration: none;
-    color: black;
-    text-align: center;
-    border: 5px solid blue;
-    border-radius: 15px;
-    padding: 5px 10px;
-    margin: 25px auto;
-    height: 40px;
-    width: 200px;
-    cursor: pointer;
-    box-shadow: none;
-    font-size: medium;
-    transition-property: width, box-shadow, height, font-size;
-    transition-duration: 1s;
+.name-div {
+  padding: 86px 0px 60px 55px;
+  text-align: center;
+  letter-spacing: 3px;
+}
+.name-div p {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: sans-serif, "Courier New", Courier, monospace;
+  line-height: 0;
 }
 
-  #DownloadBtn:hover , #ResumeLink:hover{
-    width: 230px;
-    height: 50px;
-    box-shadow: 3px 3px 10px 10px gray;
-    font-size: 18.5px;
-  }
+.name-div h1 {
+  font-size: 35px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.name-div h1 span {
+  color: var(--first-main-color);
+}
+.box-2 {
+  padding: 0px;
+  margin: 30px 0px;
+}
+.p2 {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  line-height: 18px;
+  margin: 10px 0;
+  padding-left: 0;
+}
+.box-2 h2 {
+  margin-bottom: 20px;
+  font-weight: 800;
+  padding-left: 0;
+  font-weight: 800;
+}
+.box-2 h2 span {
+  color: var(--first-main-color);
+}
+.icons-3 {
+  font-size: 25px !important;
+  vertical-align: bottom;
+  transform: translateY(-5px);
+  color: var(--second-main-color);
+}
+.p3 {
+  font-size: 15px;
+  font-weight: bold;
+  word-spacing: 1px;
+  margin: 10px 0;
+  padding-left: 0;
+}
 
- 
-/* Mobile Responsive Design */
-@media (max-width: 768px) {
-    /* Switch to single column layout for mobile */
-    #generatedResume {
-        grid-template-columns: 1fr;
-    }
+.p3 span {
+  padding-left: 7px;
+  font-weight: bolder;
+}
 
-    /* Adjust padding for left side on mobile */
-    .leftSide {
-        padding: 30px;
-    }
+.resume-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+  padding: 20px;
+}
 
-    /* Reduce left margin for right side on mobile */
-    .rightSide {
-        margin-left: 5px;
-    }
+.resume-btn {
+  padding: 10px 20px;
+  background: var(--second-main-color);
+  color: var(--first-main-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
 
-    /* Adjust font size and margin for skills on mobile */
-    .skills {
-        font-size: 90%;
-        margin: 10px auto;
-    }
-
-    /* Adjust font size for contact details on mobile */
-    .contactDetails {
-        font-size: 100%;
-    }
-
-    /* Reduce margin for content sections on mobile */
-    .edu, .work, .about {
-        margin: 30px 0px;
-    }
+.resume-btn:hover {
+  transform: scale(1.05);
+  background: var(--first-main-color);
+  color: var(--second-main-color);
 }

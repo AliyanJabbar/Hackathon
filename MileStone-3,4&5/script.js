@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,65 +8,96 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (g && (g = 0, op[0] && (_ = 0)), _) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var _a;
-var _this = this;
-//adding event listener to Generate Resume Button
-(_a = document.querySelector("#genRes")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", function (e) {
-    e.preventDefault; //Prevent reload
+var _a, _b, _c, _d, _e;
+// Add Education Entry
+(_a = document.getElementById("add-education")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
+    const container = document.getElementById("education-container");
+    const newEducation = document.createElement("div");
+    newEducation.className = "education-entry";
+    newEducation.innerHTML = `
+  <label for="Title-edu">Title:</label><br />
+  <input type="text" class="Title-edu" placeholder="Your Institute and Degree Here..." required />
+  <hr />
+  <label for="Description-edu">Description:</label><br />
+      <input type="text" class="Description-edu" placeholder="Shortly Describe What you've learned" required />
+      <br />
+      <hr />
+      <label for="date-edu">Date:</label><br />
+      <input type="text" class="date-edu" placeholder="1999-2014" required />
+      <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
+  `;
+    container === null || container === void 0 ? void 0 : container.appendChild(newEducation);
+});
+// Add Experience Entry
+(_b = document.getElementById("add-experience")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
+    const container = document.getElementById("experience-container");
+    const newExperience = document.createElement("div");
+    newExperience.className = "experience-entry";
+    newExperience.innerHTML = `
+      <label for="Title-exp">Job Title:</label><br />
+      <input type="text" class="Title-exp" placeholder="Code Alpha" required />
+      <hr />
+      <label for="Description-exp">Description:</label><br />
+      <input type="text" class="Description-exp" placeholder="Shortly Describe Your Role there" required />
+      <hr />
+      <label for="Date-exp">Date:</label><br />
+      <input type="text" class="Date-exp" placeholder="1999-2014" required />
+      <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
+  `;
+    container === null || container === void 0 ? void 0 : container.appendChild(newExperience);
+});
+// Add Service Entry
+(_c = document.getElementById("add-service")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
+    const container = document.getElementById("services-container");
+    const newService = document.createElement("div");
+    newService.className = "service-entry";
+    newService.innerHTML = `
+      <input type="text" class="services" placeholder="Your Service" required />
+      <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
+  `;
+    container === null || container === void 0 ? void 0 : container.appendChild(newService);
+});
+// Add Skill Entry
+(_d = document.getElementById("add-skill")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => {
+    const container = document.getElementById("skills-container");
+    const newSkill = document.createElement("div");
+    newSkill.className = "skill-entry";
+    newSkill.innerHTML = `
+      <input type="text" class="skills" placeholder="Your Skill" required />
+      <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
+  `;
+    container === null || container === void 0 ? void 0 : container.appendChild(newSkill);
+});
+//adding event listener to Generate Resume with Button
+(_e = document.querySelector("#genRes")) === null || _e === void 0 ? void 0 : _e.addEventListener("click", (e) => {
+    var _a;
+    e.preventDefault();
     // checking if resume already exists
-    var resume = document.getElementById("generatedResume");
+    let resume = document.getElementById("generatedResume");
     if (resume) {
         resume.innerHTML = generateResumeHTML();
         alert("Resume Updated Successfully!");
         return;
     }
     // Check if all required fields are filled
-    var requiredFields = [
-        "name",
+    const requiredFields = [
+        "fname",
+        "lname",
+        "prof",
         "email",
-        "userImage",
         "number",
+        "userImage",
         "about",
-        "Institute",
-        "Degree",
-        "startYear",
-        "endYear",
-        "company",
-        "position",
-        "startYearComp",
-        "endYearComp",
-        "Skills",
+        "Title-edu",
+        "Description-edu",
+        "date-edu",
+        "Title-exp",
+        "Description-exp",
+        "Date-exp",
+        "service",
+        "Skill",
     ];
-    var emptyFields = requiredFields.filter(function (field) {
-        return document.getElementById(field).value.trim() === "";
-    });
+    const emptyFields = requiredFields.filter((field) => document.getElementById(field).value.trim() === "");
     if (emptyFields.length > 0) {
         alert("Please fill all required fields before generating the resume.");
         return;
@@ -73,80 +105,229 @@ var _this = this;
     else {
         alert("Resume Has Been Generated Successfully! Scroll Down To View");
         //creating new div for generated-resume
-        var newResume = document.createElement("div");
+        const newResume = document.createElement("div");
         newResume.innerHTML = generateResumeHTML();
         newResume.id = "generatedResume";
-        // appending generated resume in body of our document
-        document.body.appendChild(newResume);
+        // appending generated resume to the resume container
+        (_a = document.getElementById("resumeContainer")) === null || _a === void 0 ? void 0 : _a.appendChild(newResume);
         // FOR SHAREABLE LINK
         //getting user's name
-        var username_1 = document.getElementById("name")
+        const username = document.getElementById("fname")
             .value;
-        // Getting elements in shareable Link div
-        var shareableLink = document.getElementById("ResumeLink");
-        var DownloadBtn = document.getElementById("DownloadBtn");
-        //Download button functionality
-        DownloadBtn.addEventListener("click", function () {
-            window.print();
-        });
+        // Getting elements of button
+        const shareableLink = document.getElementById("ResumeLink");
         // copy shareable link functionality
-        shareableLink.addEventListener('click', function () { return __awaiter(_this, void 0, void 0, function () {
-            var link, err_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        link = "".concat(window.location.origin, "?").concat(encodeURIComponent(username_1), "_cv.html");
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        //using clipboard API to copy shareable link
-                        return [4 /*yield*/, navigator.clipboard.writeText(link)];
-                    case 2:
-                        //using clipboard API to copy shareable link
-                        _a.sent();
-                        alert("shareable Link copied to clipboard!");
-                        return [3 /*break*/, 4];
-                    case 3:
-                        err_1 = _a.sent();
-                        console.error("Failed To Copy URL: ", err_1);
-                        alert("Failed To Copy Resume Link!");
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
-                }
+        shareableLink.addEventListener("click", () => __awaiter(void 0, void 0, void 0, function* () {
+            const link = `${window.location.origin}?${encodeURIComponent(username)}_cv.html`;
+            const DownloadBtn = document.getElementById("DownloadBtn");
+            //Download button functionality
+            DownloadBtn.addEventListener("click", () => {
+                window.print();
             });
-        }); });
+            try {
+                //using clipboard API to copy shareable link
+                yield navigator.clipboard.writeText(link);
+                alert("shareable Link copied to clipboard!");
+            }
+            catch (err) {
+                console.error("Failed To Copy URL: ", err);
+                alert("Failed To Copy Resume Link!");
+            }
+        }));
+    }
+    //making a function to generate resume
+    function generateResumeHTML() {
+        var _a, _b, _c, _d, _e, _f, _g, _h;
+        // Collecting all form's data
+        // Collect Personal Information
+        const personalInfo = {
+            firstName: document.getElementById("fname").value,
+            lastName: document.getElementById("lname").value,
+            profession: document.getElementById("prof").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("number").value,
+            image: document.getElementById("userImage"),
+            about: document.getElementById("about").value,
+        };
+        //collecting Education section
+        const educationEntries = {
+            title: ((_a = document.getElementById("Title-edu")) === null || _a === void 0 ? void 0 : _a.value) || "",
+            description: ((_b = document.getElementById("Description-edu")) === null || _b === void 0 ? void 0 : _b.value) || "",
+            date: ((_c = document.getElementById("date-edu")) === null || _c === void 0 ? void 0 : _c.value) || "",
+        };
+        // Add any additional entries if they exist
+        const additionalEntries = Array.from(document.getElementsByClassName("education-entry"))
+            .slice(1)
+            .map((entry) => {
+            var _a, _b, _c;
+            return ({
+                title: ((_a = entry.querySelector(".Title-edu")) === null || _a === void 0 ? void 0 : _a.value) || "",
+                description: ((_b = entry.querySelector(".Description-edu")) === null || _b === void 0 ? void 0 : _b.value) || "",
+                date: ((_c = entry.querySelector(".date-edu")) === null || _c === void 0 ? void 0 : _c.value) || "",
+            });
+        });
+        // Combining all entries
+        const allEducationEntries = [educationEntries, ...additionalEntries];
+        //for adding education entries
+        const educationHTML = allEducationEntries
+            .map((edu) => `
+      <div class="box-2">
+        <p class="p3">${edu.date} <span>${edu.title}</span></p>
+        <p class="p2">${edu.description}</p>
+      </div>
+    `)
+            .join("");
+        // Collecting Experience entries
+        const experienceEntries = {
+            title: ((_d = document.getElementById("Title-exp")) === null || _d === void 0 ? void 0 : _d.value) || "",
+            description: ((_e = document.getElementById("Description-exp")) === null || _e === void 0 ? void 0 : _e.value) || "",
+            date: ((_f = document.getElementById("Date-exp")) === null || _f === void 0 ? void 0 : _f.value) || "",
+        };
+        // for adding entries if more than one
+        const additionalExpEntries = Array.from(document.getElementsByClassName("experience-entry"))
+            .slice(1)
+            .map((entry) => {
+            var _a, _b, _c;
+            return ({
+                title: ((_a = entry.querySelector(".Title-exp")) === null || _a === void 0 ? void 0 : _a.value) || "",
+                description: ((_b = entry.querySelector(".Description-exp")) === null || _b === void 0 ? void 0 : _b.value) || "",
+                date: ((_c = entry.querySelector(".Date-exp")) === null || _c === void 0 ? void 0 : _c.value) || "",
+            });
+        });
+        // Combineing all entries
+        const allExperienceEntries = [experienceEntries, ...additionalExpEntries];
+        // for the html of the experience entries
+        const experienceHTML = allExperienceEntries
+            .map((exp) => `
+      <div class="box-2">
+        <p class="p3">${exp.date} <span>${exp.title}</span></p>
+        <p class="p2">${exp.description}</p>
+      </div>
+    `)
+            .join("");
+        // collecting service
+        const services = {
+            service: ((_g = document.getElementById("service")) === null || _g === void 0 ? void 0 : _g.value) || "",
+        };
+        // for adding additional service entries if exist
+        const additionalServices = Array.from(document.getElementsByClassName("service-entry"))
+            .slice(1)
+            .map((entry) => {
+            var _a;
+            return ({
+                service: ((_a = entry.querySelector(".services")) === null || _a === void 0 ? void 0 : _a.value) || "",
+            });
+        });
+        // Combine all services
+        const allServices = [services, ...additionalServices];
+        // adding services
+        const serviceHtml = allServices
+            .map((item) => `
+      <div class="service">
+        <p class="p1">${item.service}</p>
+      </div> `)
+            .join("");
+        // Collect skills similar to services
+        const skills = [
+            {
+                skill: ((_h = document.getElementById("Skill")) === null || _h === void 0 ? void 0 : _h.value) || "",
+            },
+        ];
+        // Add additional skill entries
+        const additionalSkills = Array.from(document.getElementsByClassName("skill-entry"))
+            .slice(1)
+            .map((entry) => {
+            var _a;
+            return ({
+                skill: ((_a = entry.querySelector(".skills")) === null || _a === void 0 ? void 0 : _a.value) || "",
+            });
+        });
+        // Combine all skills
+        const allSkills = [...skills, ...additionalSkills];
+        // Generate skills HTML
+        const skillsHTML = allSkills
+            .map((item) => `
+  <div class="p1">
+    ${item.skill}
+    <div class="skills-container">
+      <div class="skill skill-${allSkills.indexOf(item)}"></div>
+    </div>
+  </div>`)
+            .join("");
+        // creating image url for user provided image
+        let imageURL = "";
+        if (personalInfo.image.files) {
+            imageURL = URL.createObjectURL(personalInfo.image.files[0]); //now we can use it in src of image attribute
+        }
+        // Generating resume HTML to append
+        return `
+    <div class="main">
+      <div class="left">
+        <br />
+        <div class="profile-img">
+          <img src="${imageURL}" alt="profile-img" />
+        </div>
+        <!-- contact -->
+        <div class="box-1 contenteditable="true"">
+        <div class="heading" contenteditable="true">
+            <p>CONTACT</p>
+          </div>
+          <p class="p1" contenteditable="true">
+            <i class="material-icons icons1">call</i>${personalInfo.phone}
+          </p>
+          <p class="p1" contenteditable="true">
+            <i class="material-icons icons1">email</i>${personalInfo.email}
+          </p>
+          </div>
+          <br />
+          <!-- services -->
+          <div class="box-1" contenteditable="true">
+          <div class="heading" contenteditable="true">
+            <p>SERVICES</p>
+          </div>
+          ${serviceHtml}
+        </div>
+        <br />
+        <!-- skills -->
+        <div class="box-1" contenteditable="true">
+          <div class="heading" contenteditable="true">
+            <p>SKILLS</p>
+            </div>
+            ${skillsHTML}
+        </div>
+      </div>
+
+      <div class="right">
+        <!-- name & prefession -->
+        <div class="name-div" contenteditable="true">
+          <h1 contenteditable="true">${personalInfo.firstName} <span contenteditable="true">${personalInfo.lastName}</span></h1>
+          <p contenteditable="true">${personalInfo.profession}</p>
+        </div>
+        <!-- about me -->
+        <div class="box-2" contenteditable="true">
+        <h2>ABOUT <span>ME</span> <i class="material-icons icons-3">perm_identity</i></h2>
+        <p class="p2">
+        ${personalInfo.about}
+          </p>
+        </div>
+        <!-- education -->
+        <div class="box-2" contenteditable="true">
+          <h2>
+            MY <span>EDUCATION</span><i class="material-icons icons-3">border_color</i>
+          </h2>
+          ${educationHTML}
+        </div>
+        <!-- experience -->
+        <div class="box-2" contenteditable="true">
+          <h2>MY <span>EXPERIENCE</span><i class="material-icons icons-3">folder</i></h2>
+          ${experienceHTML}
+        </div>
+        <div class="resume-actions">
+      <button id="ResumeLink" class="resume-btn">Copy Resume Link</button>
+      <button id="DownloadBtn" class="resume-btn">Download Resume</button>
+    </div>
+      </div>
+    </div>
+    `;
     }
 });
-//making a function to generate resume
-function generateResumeHTML() {
-    // Collecting all form's data
-    var personalInfo = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        image: document.getElementById("userImage"),
-        phoneNumber: document.getElementById("number").value,
-        about: document.getElementById("about").value,
-    };
-    var education = {
-        institute: document.getElementById("Institute").value,
-        degree: document.getElementById("Degree").value,
-        startYear: document.getElementById("startYear").value,
-        endYear: document.getElementById("endYear").value,
-    };
-    var workExperience = {
-        company: document.getElementById("company").value,
-        position: document.getElementById("position").value,
-        startYear: document.getElementById("startYearComp")
-            .value,
-        endYear: document.getElementById("endYearComp").value,
-    };
-    //getting skills from user
-    var skills = document.getElementById("Skills").value;
-    // creating image url for user provided image
-    var imageURL = "";
-    if (personalInfo.image.files) {
-        imageURL = URL.createObjectURL(personalInfo.image.files[0]); //now we can use it in src of image attribute
-    }
-    // Generating resume HTML to append
-    return "\n      <!-- Left Side -->\n      <div class=\"leftSide\">\n        <!-- personal Information -->\n        <div class=\"personalInfo\">\n        <!-- Image in personal Info -->\n        <div class=\"image\">\n        <img src=\"".concat(imageURL, "\" alt=\"Resume Image\">\n        </div>\n          <!-- Name in personal info -->\n          <div contenteditable=\"true\" class=\"name\">\n            <h1>").concat(personalInfo.name, "</h1>\n          </div>\n          <!-- Contact details in personal info -->\n          <div contenteditable=\"true\"  class=\"contactDetails\">\n            <p>").concat(personalInfo.phoneNumber, "</p>\n            <p>").concat(personalInfo.email, "<p>\n  \n          </div>\n        </div>\n        \n        <!-- Skills -->\n        <div contenteditable=\"true\" class=\"skills\">\n        My Skills: ").concat(skills, "\n        </div>\n      </div>\n  \n      <!-- Right Side -->\n      <div id= \"rightSide\" class=\"rightSide\">\n        <div contenteditable=\"true\"  class=\"about\">\n          <h2 id=\"aboutHead\">About</h2>\n          <p>\n          ").concat(personalInfo.about, "\n            </p>\n        </div>\n        <!-- Education -->\n        <div contenteditable=\"true\" class=\"edu\">\n          <h2 id=\"edu\">Education</h2>\n    \n          <p><strong>").concat(education.degree, "</strong> from <strong>").concat(education.institute, "</strong></p>\n          <p>").concat(education.startYear, "-").concat(education.endYear, "</p>\n  \n        </div>\n        <!-- Work -->\n        <div contenteditable=\"true\" class=\"work\">\n          <h2 id=\"work\">Work Experience</h2>\n          <p> ").concat(workExperience.company, "\n            <br>\n            ").concat(workExperience.position, "<br>\n             (").concat(workExperience.startYear, " - ").concat(workExperience.endYear, ") <br>\n            <br>\n            </p>\n        </div>\n        <!-- shareable link and download option section -->\n    <div id=\"shareableLink\">\n    <button id=\"ResumeLink\">Copy Resume Link</button>\n      <br />\n      <button id=\"DownloadBtn\">Download As PDF</button>\n    </div>\n\n      </div>\n            ");
-}

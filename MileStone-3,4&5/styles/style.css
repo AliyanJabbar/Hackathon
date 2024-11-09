@@ -1,0 +1,15 @@
+body {
+  font-family: sans-serif, "Courier New", Courier, monospace;
+  background-color: gray;
+}
+
+/* making custom colors */
+:root {
+  --form-color: #ff9900;
+  --first-main-color: orange;
+  --second-main-color: rgb(42, 42, 42);
+}
+
+* {
+  scroll-behavior: smooth;
+}
