@@ -1,3 +1,25 @@
+document.addEventListener('click', (e) => {
+  const target = e.target as HTMLElement;
+  
+  // Handling Copy Resume Link
+  if (target.id === 'ResumeLink') {
+    const username = (document.getElementById("fname") as HTMLInputElement).value;
+    const link = `${window.location.origin}?${encodeURIComponent(username)}_cv.html`;
+    
+    navigator.clipboard.writeText(link)
+      .then(() => alert("Shareable Link copied to clipboard!"))
+      .catch((err) => {
+        console.error("Failed To Copy URL: ", err);
+        alert("Failed To Copy Resume Link!");
+      });
+  }
+  
+  // Handling Download
+  if (target.id === 'DownloadBtn') {
+    window.print();
+  }
+});
+
 // Add Education Entry
 document.getElementById("add-education")?.addEventListener("click", () => {
   const container = document.getElementById("education-container");
@@ -64,6 +86,7 @@ document.getElementById("add-skill")?.addEventListener("click", () => {
 //adding event listener to Generate Resume with Button
 document.querySelector("#genRes")?.addEventListener("click", (e: Event) => {
   e.preventDefault();
+  
   // checking if resume already exists
   let resume = document.getElementById("generatedResume");
   if (resume) {
@@ -71,7 +94,6 @@ document.querySelector("#genRes")?.addEventListener("click", (e: Event) => {
     alert("Resume Updated Successfully!");
     return;
   }
-
   // Check if all required fields are filled
   const requiredFields = [
     "fname",
@@ -90,55 +112,25 @@ document.querySelector("#genRes")?.addEventListener("click", (e: Event) => {
     "service",
     "Skill",
   ];
-
+  
   const emptyFields = requiredFields.filter(
     (field) =>
       (document.getElementById(field) as HTMLInputElement).value.trim() === ""
   );
-
+  
   if (emptyFields.length > 0) {
     alert("Please fill all required fields before generating the resume.");
     return;
   } else {
     alert("Resume Has Been Generated Successfully! Scroll Down To View");
-
+    
     //creating new div for generated-resume
     const newResume = document.createElement("div");
     newResume.innerHTML = generateResumeHTML();
     newResume.id = "generatedResume";
     // appending generated resume to the resume container
     document.getElementById("resumeContainer")?.appendChild(newResume);
-
-    // FOR SHAREABLE LINK
-    //getting user's name
-    const username = (document.getElementById("fname") as HTMLInputElement)
-      .value;
-    // Getting elements of button
-    const shareableLink = document.getElementById(
-      "ResumeLink"
-    ) as HTMLButtonElement;
-    // copy shareable link functionality
-    shareableLink.addEventListener("click", async () => {
-      const link = `${window.location.origin}?${encodeURIComponent(
-        username
-      )}_cv.html`;
-      const DownloadBtn = document.getElementById(
-        "DownloadBtn"
-      ) as HTMLButtonElement;
-      //Download button functionality
-      DownloadBtn.addEventListener("click", () => {
-        window.print();
-      });
-
-      try {
-        //using clipboard API to copy shareable link
-        await navigator.clipboard.writeText(link);
-        alert("shareable Link copied to clipboard!");
-      } catch (err) {
-        console.error("Failed To Copy URL: ", err);
-        alert("Failed To Copy Resume Link!");
-      }
-    });
+    
   }
 
   //making a function to generate resume

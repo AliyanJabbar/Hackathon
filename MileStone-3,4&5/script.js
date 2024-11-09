@@ -1,14 +1,23 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var _a, _b, _c, _d, _e;
+document.addEventListener('click', (e) => {
+    const target = e.target;
+    // Handling Copy Resume Link
+    if (target.id === 'ResumeLink') {
+        const username = document.getElementById("fname").value;
+        const link = `${window.location.origin}?${encodeURIComponent(username)}_cv.html`;
+        navigator.clipboard.writeText(link)
+            .then(() => alert("Shareable Link copied to clipboard!"))
+            .catch((err) => {
+            console.error("Failed To Copy URL: ", err);
+            alert("Failed To Copy Resume Link!");
+        });
+    }
+    // Handling Download
+    if (target.id === 'DownloadBtn') {
+        window.print();
+    }
+});
 // Add Education Entry
 (_a = document.getElementById("add-education")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
     const container = document.getElementById("education-container");
@@ -110,30 +119,6 @@ var _a, _b, _c, _d, _e;
         newResume.id = "generatedResume";
         // appending generated resume to the resume container
         (_a = document.getElementById("resumeContainer")) === null || _a === void 0 ? void 0 : _a.appendChild(newResume);
-        // FOR SHAREABLE LINK
-        //getting user's name
-        const username = document.getElementById("fname")
-            .value;
-        // Getting elements of button
-        const shareableLink = document.getElementById("ResumeLink");
-        // copy shareable link functionality
-        shareableLink.addEventListener("click", () => __awaiter(void 0, void 0, void 0, function* () {
-            const link = `${window.location.origin}?${encodeURIComponent(username)}_cv.html`;
-            const DownloadBtn = document.getElementById("DownloadBtn");
-            //Download button functionality
-            DownloadBtn.addEventListener("click", () => {
-                window.print();
-            });
-            try {
-                //using clipboard API to copy shareable link
-                yield navigator.clipboard.writeText(link);
-                alert("shareable Link copied to clipboard!");
-            }
-            catch (err) {
-                console.error("Failed To Copy URL: ", err);
-                alert("Failed To Copy Resume Link!");
-            }
-        }));
     }
     //making a function to generate resume
     function generateResumeHTML() {
