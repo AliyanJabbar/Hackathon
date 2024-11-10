@@ -95,43 +95,43 @@ document.querySelector("#genRes")?.addEventListener("click", (e: Event) => {
     return;
   }
   // Check if all required fields are filled
-  const requiredFields = [
-    "fname",
-    "lname",
-    "prof",
-    "email",
-    "number",
-    "userImage",
-    "about",
-    "Title-edu",
-    "Description-edu",
-    "date-edu",
-    "Title-exp",
-    "Description-exp",
-    "Date-exp",
-    "service",
-    "Skill",
-  ];
+  // const requiredFields = [
+  //   "fname",
+  //   "lname",
+  //   "prof",
+  //   "email",
+  //   "number",
+  //   "userImage",
+  //   "about",
+  //   "Title-edu",
+  //   "Description-edu",
+  //   "date-edu",
+  //   "Title-exp",
+  //   "Description-exp",
+  //   "Date-exp",
+  //   "service",
+  //   "Skill",
+  // ];
   
-  const emptyFields = requiredFields.filter(
-    (field) =>
-      (document.getElementById(field) as HTMLInputElement).value.trim() === ""
-  );
+  // const emptyFields = requiredFields.filter(
+  //   (field) =>
+  //     (document.getElementById(field) as HTMLInputElement).value.trim() === ""
+  // );
   
-  if (emptyFields.length > 0) {
-    alert("Please fill all required fields before generating the resume.");
-    return;
-  } else {
-    alert("Resume Has Been Generated Successfully! Scroll Down To View");
+  // if (emptyFields.length > 0) {
+  //   alert("Please fill all required fields before generating the resume.");
+  //   return;
+  // } else {
+  //   alert("Resume Has Been Generated Successfully! Scroll Down To View");
     
-    //creating new div for generated-resume
-    const newResume = document.createElement("div");
-    newResume.innerHTML = generateResumeHTML();
-    newResume.id = "generatedResume";
-    // appending generated resume to the resume container
-    document.getElementById("resumeContainer")?.appendChild(newResume);
+  //   //creating new div for generated-resume
+  //   const newResume = document.createElement("div");
+  //   newResume.innerHTML = generateResumeHTML();
+  //   newResume.id = "generatedResume";
+  //   // appending generated resume to the resume container
+  //   document.getElementById("resumeContainer")?.appendChild(newResume);
     
-  }
+  // }
 
   //making a function to generate resume
   function generateResumeHTML() {

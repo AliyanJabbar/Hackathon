@@ -8,7 +8,8 @@
 
 .mainDiv {
   background-color: var(--form-color);
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
   border: 5px solid black;
   border-radius: 10px;
   margin: 50px auto;
@@ -146,18 +147,16 @@ hr {
 
 @media (max-width: 800px) {
   .mainDiv {
-    width: 500px;
+    width: 95%;
   }
 
   .field {
-    width: 400px;
+    width: 90%;
   }
 
-  input {
-    width: 300px;
-  }
-  .textarea-div {
-    width: 310px;
+  input, .textarea-div {
+    width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -171,12 +170,9 @@ hr {
   }
 
   .field {
-    width: 230px !important;
+    width: 90% !important;
   }
-  input {
-    width: 180px;
-  }
-  .textarea-div {
-    width: 200px !important;
-  }
+input,.textarea-div{
+  width: 90%;
+}
 }

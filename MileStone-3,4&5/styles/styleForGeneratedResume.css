@@ -2,17 +2,21 @@
 
 #generatedResume {
   display: block;
-  margin: 0px 435px;
-  height: 190vh;
+  margin: 50px auto;
+  max-width: 800px;
+  width: 100%;
+  height: auto;
 }
 .main {
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: row;
-  margin: 150px 0;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin: 0 auto;
   background-color: white;
-  height: fit-content;
-  width: 650px;
+  width: 100%;
+  max-width: 800px;
   box-shadow: 0px 0px 40px 15px rgb(37, 36, 36);
   z-index: 0;
 }
@@ -22,13 +26,12 @@
   padding: 20px 0;
   background-color: var(--first-main-color);
   height: 400px;
-  width: 200px;
+  width: 25%;
   height: 100%;
-  min-height: 120vh;
+  min-height: 140vh;
   float: left;
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
 
 .profile-img {
@@ -45,6 +48,8 @@
 
 .profile-img img {
   width: 100%;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   box-shadow: 0px 0px 50px 10px var(--first-main-color);
 }
@@ -157,25 +162,26 @@
 /* right side  */
 
 .right {
-  width: 450px;
+  width: 71%;
   float: left;
   padding: 0 50px;
 }
 
 .name-div {
-  padding: 86px 0px 60px 55px;
+  padding: 50px;
   text-align: center;
   letter-spacing: 3px;
 }
 .name-div p {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
   font-family: sans-serif, "Courier New", Courier, monospace;
   line-height: 0;
+  text-wrap: nowrap;
 }
 
 .name-div h1 {
-  font-size: 35px;
+  font-size: 45px;
   font-weight: 900;
   margin-bottom: 10px;
 }
@@ -246,4 +252,143 @@
   transform: scale(1.05);
   background: var(--first-main-color);
   color: var(--second-main-color);
+}
+
+/* responsive resume */
+@media screen and (max-width: 900px) {
+  #generatedResume {
+    margin: 50px 20px;
+    width: 95%;
+  }
+  
+  .main {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .left {
+    width: 35%;
+    padding: 20px 10px;
+  }
+
+  .right {
+    width: 65%;
+    padding: 20px 15px;
+  }
+
+  .heading::after{
+    display: none;
+  }
+  .profile-img {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+  }
+
+  .profile-img img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .name-div {
+    padding: 30px 10px;
+  }
+
+  .name-div h1 {
+    font-size: 32px;
+  }
+
+  .name-div p {
+    font-size: 18px;
+  }
+
+  .p1, .p2, .p3 {
+    font-size: 14px;
+  }
+
+  .box-2 h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .name-div h1 {
+    font-size: 30px;
+  }
+  .name-div p {
+    font-size: 20px;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  #generatedResume {
+    width: 95%;
+    margin: 20px auto;
+  }
+
+  .main {
+    width: 100%;
+    box-shadow: 0px 0px 20px 5px rgb(37, 36, 36);
+  }
+
+  .left {
+    min-width: 100px;
+    padding: 10px 5px;
+  }
+
+  .right {
+    width: 60%;
+    padding: 10px;
+    margin-left: 10px;
+  }
+
+  .profile-img {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+
+  .profile-img img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .heading {
+    font-size: 14px;
+    height: 30px;
+    text-wrap: nowrap;
+  }
+
+  .name-div {
+    padding: 10px 5px;
+  }
+
+  .name-div h1 {
+    font-size: 18px;
+  }
+
+  .name-div p {
+    font-size: 14px;
+  }
+
+  .p1, .p2, .p3 {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .box-2 h2 {
+    font-size: 16px;
+  }
+
+  .icons-3{
+    font-size: 15px!important;
+  }
+  .resume-actions{
+    flex-direction: column;
+  }
+  .resume-btn {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
 }
