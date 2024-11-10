@@ -1,6 +1,5 @@
 document.addEventListener('click', (e) => {
   const target = e.target as HTMLElement;
-  
   // Handling Copy Resume Link
   if (target.id === 'ResumeLink') {
     const username = (document.getElementById("fname") as HTMLInputElement).value;
@@ -14,9 +13,81 @@ document.addEventListener('click', (e) => {
       });
   }
   
-  // Handling Download
+  // Download button functionality
   if (target.id === 'DownloadBtn') {
-    window.print();
+    // Get all CSS content
+    const mainStyles = document.querySelector('link[href*="style.css"]')?.getAttribute('href') || '';
+    const formStyles = document.querySelector('link[href*="formStyle.css"]')?.getAttribute('href') || '';
+    const resumeStyles = document.querySelector('link[href*="styleForGeneratedResume.css"]')?.getAttribute('href') || '';
+  
+    // Get the image and convert to base64 with fixed dimensions
+    const imageElement = document.querySelector('#generatedResume .profile-img img') as HTMLImageElement;
+    const canvas = document.createElement('canvas');
+    // Set fixed dimensions for the image
+    canvas.width = 180;  // Match the CSS width
+    canvas.height = 180; // Match the CSS height
+    const ctx = canvas.getContext('2d');
+    ctx?.drawImage(imageElement, 0, 0, 180, 180); // Specify dimensions in drawImage
+    const base64Image = canvas.toDataURL('image/png');
+  
+    // Cloneing and modifying the resume content
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = document.getElementById('generatedResume')?.innerHTML || '';
+    
+    // Remove the resume-actions div containing buttons
+    const actionsDiv = tempDiv.querySelector('.resume-actions');
+    actionsDiv?.remove();
+    
+    // Remove contenteditable attributes
+    const editableElements = tempDiv.querySelectorAll('[contenteditable]');
+    editableElements.forEach(el => el.removeAttribute('contenteditable'));
+    
+    // Replace image src with base64 data
+    const resumeContent = tempDiv.innerHTML.replace(imageElement.src, base64Image);
+  
+    // Fetch and combine all CSS files
+    Promise.all([
+      fetch(mainStyles).then(response => response.text()),
+      fetch(formStyles).then(response => response.text()),
+      fetch(resumeStyles).then(response => response.text())
+    ]).then(styles => {
+      const combinedStyles = styles.join('\n');
+      
+      const fullHTML = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>My Resume</title>
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <style>
+              :root {
+                --form-color: #ff9900;
+                --first-main-color: orange;
+                --second-main-color: rgb(42, 42, 42);
+              }
+              ${combinedStyles}
+            </style>
+        </head>
+        <body>
+            <div id="generatedResume">
+                ${resumeContent}
+            </div>
+        </body>
+        </html>
+      `;
+  
+      const blob = new Blob([fullHTML], { type: 'text/html' });
+      const url = window.URL.createObjectURL(blob);
+      const downloadLink = document.createElement('a');
+      downloadLink.href = url;
+      downloadLink.download = 'my-resume.html';
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      window.URL.revokeObjectURL(url);
+    });
   }
 });
 
@@ -95,43 +166,43 @@ document.querySelector("#genRes")?.addEventListener("click", (e: Event) => {
     return;
   }
   // Check if all required fields are filled
-  // const requiredFields = [
-  //   "fname",
-  //   "lname",
-  //   "prof",
-  //   "email",
-  //   "number",
-  //   "userImage",
-  //   "about",
-  //   "Title-edu",
-  //   "Description-edu",
-  //   "date-edu",
-  //   "Title-exp",
-  //   "Description-exp",
-  //   "Date-exp",
-  //   "service",
-  //   "Skill",
-  // ];
+  const requiredFields = [
+    "fname",
+    "lname",
+    "prof",
+    "email",
+    "number",
+    "userImage",
+    "about",
+    "Title-edu",
+    "Description-edu",
+    "date-edu",
+    "Title-exp",
+    "Description-exp",
+    "Date-exp",
+    "service",
+    "Skill",
+  ];
   
-  // const emptyFields = requiredFields.filter(
-  //   (field) =>
-  //     (document.getElementById(field) as HTMLInputElement).value.trim() === ""
-  // );
+  const emptyFields = requiredFields.filter(
+    (field) =>
+      (document.getElementById(field) as HTMLInputElement).value.trim() === ""
+  );
   
-  // if (emptyFields.length > 0) {
-  //   alert("Please fill all required fields before generating the resume.");
-  //   return;
-  // } else {
-  //   alert("Resume Has Been Generated Successfully! Scroll Down To View");
+  if (emptyFields.length > 0) {
+    alert("Please fill all required fields before generating the resume.");
+    return;
+  } else {
+    alert("Resume Has Been Generated Successfully! Scroll Down To View");
     
-  //   //creating new div for generated-resume
-  //   const newResume = document.createElement("div");
-  //   newResume.innerHTML = generateResumeHTML();
-  //   newResume.id = "generatedResume";
-  //   // appending generated resume to the resume container
-  //   document.getElementById("resumeContainer")?.appendChild(newResume);
+    //creating new div for generated-resume
+    const newResume = document.createElement("div");
+    newResume.innerHTML = generateResumeHTML();
+    newResume.id = "generatedResume";
+    // appending generated resume to the resume container
+    document.getElementById("resumeContainer")?.appendChild(newResume);
     
-  // }
+  }
 
   //making a function to generate resume
   function generateResumeHTML() {
