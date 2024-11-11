@@ -1,14 +1,61 @@
 "use strict";
 var _a, _b, _c, _d, _e;
+window.addEventListener('load', () => {
+    const hash = window.location.hash;
+    if (hash.startsWith('#resume=')) {
+        const encodedContent = hash.replace('#resume=', '');
+        const decodedContent = atob(encodedContent);
+        // Clearing the entire body content
+        document.body.innerHTML = '';
+        // Creating a clean container for the resume
+        const resumeContainer = document.createElement('div');
+        resumeContainer.id = 'resumeContainer';
+        resumeContainer.innerHTML = decodedContent;
+        // Adding necessary styles
+        const styleLink = document.createElement('link');
+        styleLink.rel = 'stylesheet';
+        styleLink.href = 'styleForGeneratedResume.css';
+        document.head.appendChild(styleLink);
+        // Adding material icons
+        const iconLink = document.createElement('link');
+        iconLink.rel = 'stylesheet';
+        iconLink.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+        document.head.appendChild(iconLink);
+        // Adding the resume to the body
+        document.body.appendChild(resumeContainer);
+    }
+});
 document.addEventListener('click', (e) => {
-    var _a, _b, _c, _d;
+    var _a, _b, _c, _d, _e;
     const target = e.target;
     // Handling Copy Resume Link
     if (target.id === 'ResumeLink') {
         const username = document.getElementById("fname").value;
-        const link = `${window.location.origin}?${encodeURIComponent(username)}_cv.html`;
-        navigator.clipboard.writeText(link)
-            .then(() => alert("Shareable Link copied to clipboard!"))
+        // Cloning the resume content
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = ((_a = document.getElementById('generatedResume')) === null || _a === void 0 ? void 0 : _a.innerHTML) || '';
+        // Converting image to base64
+        const imageElement = tempDiv.querySelector('.profile-img img');
+        const canvas = document.createElement('canvas');
+        canvas.width = 180;
+        canvas.height = 180;
+        const ctx = canvas.getContext('2d');
+        ctx === null || ctx === void 0 ? void 0 : ctx.drawImage(imageElement, 0, 0, 180, 180);
+        const base64Image = canvas.toDataURL('image/png');
+        // Replaceing image src with base64 data
+        imageElement.src = base64Image;
+        // Removing the resume-actions div containing buttons
+        const actionsDiv = tempDiv.querySelector('.resume-actions');
+        actionsDiv === null || actionsDiv === void 0 ? void 0 : actionsDiv.remove();
+        // Removing contenteditable attributes
+        const editableElements = tempDiv.querySelectorAll('[contenteditable]');
+        editableElements.forEach(el => el.removeAttribute('contenteditable'));
+        // Converting the resume content to base64
+        const resumeContent = btoa(tempDiv.innerHTML);
+        // Creating a shareable URL with the base64 content as a hash parameter
+        const shareableLink = `${window.location.origin}${window.location.pathname}#resume=${resumeContent}`;
+        navigator.clipboard.writeText(shareableLink)
+            .then(() => alert("Shareable Resume Link copied to clipboard!"))
             .catch((err) => {
             console.error("Failed To Copy URL: ", err);
             alert("Failed To Copy Resume Link!");
@@ -16,14 +63,14 @@ document.addEventListener('click', (e) => {
     }
     // Download button functionality
     if (target.id === 'DownloadBtn') {
-        // Get all CSS content
-        const mainStyles = ((_a = document.querySelector('link[href*="style.css"]')) === null || _a === void 0 ? void 0 : _a.getAttribute('href')) || '';
-        const formStyles = ((_b = document.querySelector('link[href*="formStyle.css"]')) === null || _b === void 0 ? void 0 : _b.getAttribute('href')) || '';
-        const resumeStyles = ((_c = document.querySelector('link[href*="styleForGeneratedResume.css"]')) === null || _c === void 0 ? void 0 : _c.getAttribute('href')) || '';
-        // Get the image and convert to base64 with fixed dimensions
+        // Getting all CSS content
+        const mainStyles = ((_b = document.querySelector('link[href*="style.css"]')) === null || _b === void 0 ? void 0 : _b.getAttribute('href')) || '';
+        const formStyles = ((_c = document.querySelector('link[href*="formStyle.css"]')) === null || _c === void 0 ? void 0 : _c.getAttribute('href')) || '';
+        const resumeStyles = ((_d = document.querySelector('link[href*="styleForGeneratedResume.css"]')) === null || _d === void 0 ? void 0 : _d.getAttribute('href')) || '';
+        // Getting the image and convert to base64 with fixed dimensions
         const imageElement = document.querySelector('#generatedResume .profile-img img');
         const canvas = document.createElement('canvas');
-        // Set fixed dimensions for the image
+        // Setting fixed dimensions for the image
         canvas.width = 180; // Match the CSS width
         canvas.height = 180; // Match the CSS height
         const ctx = canvas.getContext('2d');
@@ -31,16 +78,16 @@ document.addEventListener('click', (e) => {
         const base64Image = canvas.toDataURL('image/png');
         // Cloneing and modifying the resume content
         const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = ((_d = document.getElementById('generatedResume')) === null || _d === void 0 ? void 0 : _d.innerHTML) || '';
-        // Remove the resume-actions div containing buttons
+        tempDiv.innerHTML = ((_e = document.getElementById('generatedResume')) === null || _e === void 0 ? void 0 : _e.innerHTML) || '';
+        // Removing the resume-actions div containing buttons
         const actionsDiv = tempDiv.querySelector('.resume-actions');
         actionsDiv === null || actionsDiv === void 0 ? void 0 : actionsDiv.remove();
-        // Remove contenteditable attributes
+        // Removing contenteditable attributes
         const editableElements = tempDiv.querySelectorAll('[contenteditable]');
         editableElements.forEach(el => el.removeAttribute('contenteditable'));
-        // Replace image src with base64 data
+        // Replaceing image src with base64 data
         const resumeContent = tempDiv.innerHTML.replace(imageElement.src, base64Image);
-        // Fetch and combine all CSS files
+        // Fetching and combine all CSS files
         Promise.all([
             fetch(mainStyles).then(response => response.text()),
             fetch(formStyles).then(response => response.text()),
@@ -83,7 +130,7 @@ document.addEventListener('click', (e) => {
         });
     }
 });
-// Add Education Entry
+// Adding Education Entry
 (_a = document.getElementById("add-education")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
     const container = document.getElementById("education-container");
     const newEducation = document.createElement("div");
@@ -102,7 +149,7 @@ document.addEventListener('click', (e) => {
   `;
     container === null || container === void 0 ? void 0 : container.appendChild(newEducation);
 });
-// Add Experience Entry
+// Adding Experience Entry
 (_b = document.getElementById("add-experience")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
     const container = document.getElementById("experience-container");
     const newExperience = document.createElement("div");
@@ -120,7 +167,7 @@ document.addEventListener('click', (e) => {
   `;
     container === null || container === void 0 ? void 0 : container.appendChild(newExperience);
 });
-// Add Service Entry
+// Adding Service Entry
 (_c = document.getElementById("add-service")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
     const container = document.getElementById("services-container");
     const newService = document.createElement("div");
@@ -131,7 +178,7 @@ document.addEventListener('click', (e) => {
   `;
     container === null || container === void 0 ? void 0 : container.appendChild(newService);
 });
-// Add Skill Entry
+// Adding Skill Entry
 (_d = document.getElementById("add-skill")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => {
     const container = document.getElementById("skills-container");
     const newSkill = document.createElement("div");
@@ -153,7 +200,7 @@ document.addEventListener('click', (e) => {
         alert("Resume Updated Successfully!");
         return;
     }
-    // Check if all required fields are filled
+    // Checking if all required fields are filled
     const requiredFields = [
         "fname",
         "lname",

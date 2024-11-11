@@ -1,12 +1,72 @@
+window.addEventListener('load', () => {
+  const hash = window.location.hash;
+  if (hash.startsWith('#resume=')) {
+    const encodedContent = hash.replace('#resume=', '');
+    const decodedContent = atob(encodedContent);
+    
+    // Clearing the entire body content
+    document.body.innerHTML = '';
+    
+    // Creating a clean container for the resume
+    const resumeContainer = document.createElement('div');
+    resumeContainer.id = 'resumeContainer';
+    resumeContainer.innerHTML = decodedContent;
+    
+    // Adding necessary styles
+    const styleLink = document.createElement('link');
+    styleLink.rel = 'stylesheet';
+    styleLink.href = 'styleForGeneratedResume.css';
+    document.head.appendChild(styleLink);
+    
+    // Adding material icons
+    const iconLink = document.createElement('link');
+    iconLink.rel = 'stylesheet';
+    iconLink.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+    document.head.appendChild(iconLink);
+    
+    // Adding the resume to the body
+    document.body.appendChild(resumeContainer);
+  }
+});
+
 document.addEventListener('click', (e) => {
   const target = e.target as HTMLElement;
   // Handling Copy Resume Link
   if (target.id === 'ResumeLink') {
     const username = (document.getElementById("fname") as HTMLInputElement).value;
-    const link = `${window.location.origin}?${encodeURIComponent(username)}_cv.html`;
     
-    navigator.clipboard.writeText(link)
-      .then(() => alert("Shareable Link copied to clipboard!"))
+    // Cloning the resume content
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = document.getElementById('generatedResume')?.innerHTML || '';
+    
+    // Converting image to base64
+    const imageElement = tempDiv.querySelector('.profile-img img') as HTMLImageElement;
+    const canvas = document.createElement('canvas');
+    canvas.width = 180;
+    canvas.height = 180;
+    const ctx = canvas.getContext('2d');
+    ctx?.drawImage(imageElement, 0, 0, 180, 180);
+    const base64Image = canvas.toDataURL('image/png');
+    
+    // Replaceing image src with base64 data
+    imageElement.src = base64Image;
+    
+    // Removing the resume-actions div containing buttons
+    const actionsDiv = tempDiv.querySelector('.resume-actions');
+    actionsDiv?.remove();
+    
+    // Removing contenteditable attributes
+    const editableElements = tempDiv.querySelectorAll('[contenteditable]');
+    editableElements.forEach(el => el.removeAttribute('contenteditable'));
+  
+    // Converting the resume content to base64
+    const resumeContent = btoa(tempDiv.innerHTML);
+    
+    // Creating a shareable URL with the base64 content as a hash parameter
+    const shareableLink = `${window.location.origin}${window.location.pathname}#resume=${resumeContent}`;
+    
+    navigator.clipboard.writeText(shareableLink)
+      .then(() => alert("Shareable Resume Link copied to clipboard!"))
       .catch((err) => {
         console.error("Failed To Copy URL: ", err);
         alert("Failed To Copy Resume Link!");
@@ -15,15 +75,15 @@ document.addEventListener('click', (e) => {
   
   // Download button functionality
   if (target.id === 'DownloadBtn') {
-    // Get all CSS content
+    // Getting all CSS content
     const mainStyles = document.querySelector('link[href*="style.css"]')?.getAttribute('href') || '';
     const formStyles = document.querySelector('link[href*="formStyle.css"]')?.getAttribute('href') || '';
     const resumeStyles = document.querySelector('link[href*="styleForGeneratedResume.css"]')?.getAttribute('href') || '';
   
-    // Get the image and convert to base64 with fixed dimensions
+    // Getting the image and convert to base64 with fixed dimensions
     const imageElement = document.querySelector('#generatedResume .profile-img img') as HTMLImageElement;
     const canvas = document.createElement('canvas');
-    // Set fixed dimensions for the image
+    // Setting fixed dimensions for the image
     canvas.width = 180;  // Match the CSS width
     canvas.height = 180; // Match the CSS height
     const ctx = canvas.getContext('2d');
@@ -34,18 +94,18 @@ document.addEventListener('click', (e) => {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = document.getElementById('generatedResume')?.innerHTML || '';
     
-    // Remove the resume-actions div containing buttons
+    // Removing the resume-actions div containing buttons
     const actionsDiv = tempDiv.querySelector('.resume-actions');
     actionsDiv?.remove();
     
-    // Remove contenteditable attributes
+    // Removing contenteditable attributes
     const editableElements = tempDiv.querySelectorAll('[contenteditable]');
     editableElements.forEach(el => el.removeAttribute('contenteditable'));
     
-    // Replace image src with base64 data
+    // Replaceing image src with base64 data
     const resumeContent = tempDiv.innerHTML.replace(imageElement.src, base64Image);
   
-    // Fetch and combine all CSS files
+    // Fetching and combine all CSS files
     Promise.all([
       fetch(mainStyles).then(response => response.text()),
       fetch(formStyles).then(response => response.text()),
@@ -91,7 +151,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Add Education Entry
+// Adding Education Entry
 document.getElementById("add-education")?.addEventListener("click", () => {
   const container = document.getElementById("education-container");
   const newEducation = document.createElement("div");
@@ -111,7 +171,7 @@ document.getElementById("add-education")?.addEventListener("click", () => {
   container?.appendChild(newEducation);
 });
 
-// Add Experience Entry
+// Adding Experience Entry
 document.getElementById("add-experience")?.addEventListener("click", () => {
   const container = document.getElementById("experience-container");
   const newExperience = document.createElement("div");
@@ -130,7 +190,7 @@ document.getElementById("add-experience")?.addEventListener("click", () => {
   container?.appendChild(newExperience);
 });
 
-// Add Service Entry
+// Adding Service Entry
 document.getElementById("add-service")?.addEventListener("click", () => {
   const container = document.getElementById("services-container");
   const newService = document.createElement("div");
@@ -142,7 +202,7 @@ document.getElementById("add-service")?.addEventListener("click", () => {
   container?.appendChild(newService);
 });
 
-// Add Skill Entry
+// Adding Skill Entry
 document.getElementById("add-skill")?.addEventListener("click", () => {
   const container = document.getElementById("skills-container");
   const newSkill = document.createElement("div");
@@ -165,7 +225,7 @@ document.querySelector("#genRes")?.addEventListener("click", (e: Event) => {
     alert("Resume Updated Successfully!");
     return;
   }
-  // Check if all required fields are filled
+  // Checking if all required fields are filled
   const requiredFields = [
     "fname",
     "lname",
