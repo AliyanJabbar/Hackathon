@@ -1,99 +1,110 @@
 "use strict";
-var _a, _b, _c, _d, _e;
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
     const hash = window.location.hash;
-    if (hash.startsWith('#resume=')) {
-        const encodedContent = hash.replace('#resume=', '');
+    if (hash.startsWith("#resume=")) {
+        const encodedContent = hash.replace("#resume=", "");
         const decodedContent = atob(encodedContent);
         // Clearing the entire body content
-        document.body.innerHTML = '';
+        document.body.innerHTML = "";
         // Creating a clean container for the resume
-        const resumeContainer = document.createElement('div');
-        resumeContainer.id = 'resumeContainer';
+        const resumeContainer = document.createElement("div");
+        resumeContainer.id = "resumeContainer";
         resumeContainer.innerHTML = decodedContent;
         // Adding necessary styles
-        const styleLink = document.createElement('link');
-        styleLink.rel = 'stylesheet';
-        styleLink.href = 'styleForGeneratedResume.css';
+        const styleLink = document.createElement("link");
+        styleLink.rel = "stylesheet";
+        styleLink.href = "styleForGeneratedResume.css";
         document.head.appendChild(styleLink);
         // Adding material icons
-        const iconLink = document.createElement('link');
-        iconLink.rel = 'stylesheet';
-        iconLink.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+        const iconLink = document.createElement("link");
+        iconLink.rel = "stylesheet";
+        iconLink.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
         document.head.appendChild(iconLink);
         // Adding the resume to the body
         document.body.appendChild(resumeContainer);
     }
 });
-document.addEventListener('click', (e) => {
-    var _a, _b, _c, _d, _e;
+document.addEventListener("click", (e) => {
     const target = e.target;
     // Handling Copy Resume Link
-    if (target.id === 'ResumeLink') {
-        const username = document.getElementById("fname").value;
+    if (target.id === "ResumeLink") {
         // Cloning the resume content
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = ((_a = document.getElementById('generatedResume')) === null || _a === void 0 ? void 0 : _a.innerHTML) || '';
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML =
+            document.getElementById("generatedResume")?.innerHTML || "";
         // Converting image to base64
-        const imageElement = tempDiv.querySelector('.profile-img img');
-        const canvas = document.createElement('canvas');
+        const imageElement = tempDiv.querySelector(".profile-img img");
+        const canvas = document.createElement("canvas");
         canvas.width = 180;
         canvas.height = 180;
-        const ctx = canvas.getContext('2d');
-        ctx === null || ctx === void 0 ? void 0 : ctx.drawImage(imageElement, 0, 0, 180, 180);
-        const base64Image = canvas.toDataURL('image/png');
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(imageElement, 0, 0, 180, 180);
+        const base64Image = canvas.toDataURL("image/png");
         // Replaceing image src with base64 data
         imageElement.src = base64Image;
         // Removing the resume-actions div containing buttons
-        const actionsDiv = tempDiv.querySelector('.resume-actions');
-        actionsDiv === null || actionsDiv === void 0 ? void 0 : actionsDiv.remove();
+        const actionsDiv = tempDiv.querySelector(".resume-actions");
+        actionsDiv?.remove();
         // Removing contenteditable attributes
-        const editableElements = tempDiv.querySelectorAll('[contenteditable]');
-        editableElements.forEach(el => el.removeAttribute('contenteditable'));
+        const editableElements = tempDiv.querySelectorAll("[contenteditable]");
+        editableElements.forEach((el) => el.removeAttribute("contenteditable"));
         // Converting the resume content to base64
         const resumeContent = btoa(tempDiv.innerHTML);
         // Creating a shareable URL with the base64 content as a hash parameter
         const shareableLink = `${window.location.origin}${window.location.pathname}#resume=${resumeContent}`;
-        navigator.clipboard.writeText(shareableLink)
+        target.innerText = "Processing...";
+        target.disabled = true;
+        navigator.clipboard
+            .writeText(shareableLink)
             .then(() => alert("Shareable Resume Link copied to clipboard!"))
             .catch((err) => {
             console.error("Failed To Copy URL: ", err);
             alert("Failed To Copy Resume Link!");
+        })
+            .finally(() => {
+            target.innerText = "Copy Resume Link";
+            target.disabled = false;
         });
     }
     // Download button functionality
-    if (target.id === 'DownloadBtn') {
+    if (target.id === "DownloadBtn") {
         // Getting all CSS content
-        const mainStyles = ((_b = document.querySelector('link[href*="style.css"]')) === null || _b === void 0 ? void 0 : _b.getAttribute('href')) || '';
-        const formStyles = ((_c = document.querySelector('link[href*="formStyle.css"]')) === null || _c === void 0 ? void 0 : _c.getAttribute('href')) || '';
-        const resumeStyles = ((_d = document.querySelector('link[href*="styleForGeneratedResume.css"]')) === null || _d === void 0 ? void 0 : _d.getAttribute('href')) || '';
+        const mainStyles = document.querySelector('link[href*="style.css"]')?.getAttribute("href") ||
+            "";
+        const formStyles = document
+            .querySelector('link[href*="formStyle.css"]')
+            ?.getAttribute("href") || "";
+        const resumeStyles = document
+            .querySelector('link[href*="styleForGeneratedResume.css"]')
+            ?.getAttribute("href") || "";
         // Getting the image and convert to base64 with fixed dimensions
-        const imageElement = document.querySelector('#generatedResume .profile-img img');
-        const canvas = document.createElement('canvas');
+        const imageElement = document.querySelector("#generatedResume .profile-img img");
+        const canvas = document.createElement("canvas");
         // Setting fixed dimensions for the image
         canvas.width = 180; // Match the CSS width
         canvas.height = 180; // Match the CSS height
-        const ctx = canvas.getContext('2d');
-        ctx === null || ctx === void 0 ? void 0 : ctx.drawImage(imageElement, 0, 0, 180, 180); // Specify dimensions in drawImage
-        const base64Image = canvas.toDataURL('image/png');
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(imageElement, 0, 0, 180, 180); // Specify dimensions in drawImage
+        const base64Image = canvas.toDataURL("image/png");
         // Cloneing and modifying the resume content
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = ((_e = document.getElementById('generatedResume')) === null || _e === void 0 ? void 0 : _e.innerHTML) || '';
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML =
+            document.getElementById("generatedResume")?.innerHTML || "";
         // Removing the resume-actions div containing buttons
-        const actionsDiv = tempDiv.querySelector('.resume-actions');
-        actionsDiv === null || actionsDiv === void 0 ? void 0 : actionsDiv.remove();
+        const actionsDiv = tempDiv.querySelector(".resume-actions");
+        actionsDiv?.remove();
         // Removing contenteditable attributes
-        const editableElements = tempDiv.querySelectorAll('[contenteditable]');
-        editableElements.forEach(el => el.removeAttribute('contenteditable'));
+        const editableElements = tempDiv.querySelectorAll("[contenteditable]");
+        editableElements.forEach((el) => el.removeAttribute("contenteditable"));
         // Replaceing image src with base64 data
         const resumeContent = tempDiv.innerHTML.replace(imageElement.src, base64Image);
         // Fetching and combine all CSS files
         Promise.all([
-            fetch(mainStyles).then(response => response.text()),
-            fetch(formStyles).then(response => response.text()),
-            fetch(resumeStyles).then(response => response.text())
-        ]).then(styles => {
-            const combinedStyles = styles.join('\n');
+            fetch(mainStyles).then((response) => response.text()),
+            fetch(formStyles).then((response) => response.text()),
+            fetch(resumeStyles).then((response) => response.text()),
+        ]).then((styles) => {
+            const combinedStyles = styles.join("\n");
             const fullHTML = `
         <!DOCTYPE html>
         <html>
@@ -118,11 +129,11 @@ document.addEventListener('click', (e) => {
         </body>
         </html>
       `;
-            const blob = new Blob([fullHTML], { type: 'text/html' });
+            const blob = new Blob([fullHTML], { type: "text/html" });
             const url = window.URL.createObjectURL(blob);
-            const downloadLink = document.createElement('a');
+            const downloadLink = document.createElement("a");
             downloadLink.href = url;
-            downloadLink.download = 'my-resume.html';
+            downloadLink.download = "my-resume.html";
             document.body.appendChild(downloadLink);
             downloadLink.click();
             document.body.removeChild(downloadLink);
@@ -131,7 +142,7 @@ document.addEventListener('click', (e) => {
     }
 });
 // Adding Education Entry
-(_a = document.getElementById("add-education")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
+document.getElementById("add-education")?.addEventListener("click", () => {
     const container = document.getElementById("education-container");
     const newEducation = document.createElement("div");
     newEducation.className = "education-entry";
@@ -147,10 +158,10 @@ document.addEventListener('click', (e) => {
       <input type="text" class="date-edu" placeholder="1999-2014" required />
       <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
   `;
-    container === null || container === void 0 ? void 0 : container.appendChild(newEducation);
+    container?.appendChild(newEducation);
 });
 // Adding Experience Entry
-(_b = document.getElementById("add-experience")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
+document.getElementById("add-experience")?.addEventListener("click", () => {
     const container = document.getElementById("experience-container");
     const newExperience = document.createElement("div");
     newExperience.className = "experience-entry";
@@ -165,10 +176,10 @@ document.addEventListener('click', (e) => {
       <input type="text" class="Date-exp" placeholder="1999-2014" required />
       <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
   `;
-    container === null || container === void 0 ? void 0 : container.appendChild(newExperience);
+    container?.appendChild(newExperience);
 });
 // Adding Service Entry
-(_c = document.getElementById("add-service")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
+document.getElementById("add-service")?.addEventListener("click", () => {
     const container = document.getElementById("services-container");
     const newService = document.createElement("div");
     newService.className = "service-entry";
@@ -176,10 +187,10 @@ document.addEventListener('click', (e) => {
       <input type="text" class="services" placeholder="Your Service" required />
       <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
   `;
-    container === null || container === void 0 ? void 0 : container.appendChild(newService);
+    container?.appendChild(newService);
 });
 // Adding Skill Entry
-(_d = document.getElementById("add-skill")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => {
+document.getElementById("add-skill")?.addEventListener("click", () => {
     const container = document.getElementById("skills-container");
     const newSkill = document.createElement("div");
     newSkill.className = "skill-entry";
@@ -187,11 +198,10 @@ document.addEventListener('click', (e) => {
       <input type="text" class="skills" placeholder="Your Skill" required />
       <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
   `;
-    container === null || container === void 0 ? void 0 : container.appendChild(newSkill);
+    container?.appendChild(newSkill);
 });
 //adding event listener to Generate Resume with Button
-(_e = document.querySelector("#genRes")) === null || _e === void 0 ? void 0 : _e.addEventListener("click", (e) => {
-    var _a;
+document.querySelector("#genRes")?.addEventListener("click", (e) => {
     e.preventDefault();
     // checking if resume already exists
     let resume = document.getElementById("generatedResume");
@@ -230,11 +240,10 @@ document.addEventListener('click', (e) => {
         newResume.innerHTML = generateResumeHTML();
         newResume.id = "generatedResume";
         // appending generated resume to the resume container
-        (_a = document.getElementById("resumeContainer")) === null || _a === void 0 ? void 0 : _a.appendChild(newResume);
+        document.getElementById("resumeContainer")?.appendChild(newResume);
     }
     //making a function to generate resume
     function generateResumeHTML() {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
         // Collecting all form's data
         // Collect Personal Information
         const personalInfo = {
@@ -248,21 +257,20 @@ document.addEventListener('click', (e) => {
         };
         //collecting Education section
         const educationEntries = {
-            title: ((_a = document.getElementById("Title-edu")) === null || _a === void 0 ? void 0 : _a.value) || "",
-            description: ((_b = document.getElementById("Description-edu")) === null || _b === void 0 ? void 0 : _b.value) || "",
-            date: ((_c = document.getElementById("date-edu")) === null || _c === void 0 ? void 0 : _c.value) || "",
+            title: document.getElementById("Title-edu")?.value || "",
+            description: document.getElementById("Description-edu")
+                ?.value || "",
+            date: document.getElementById("date-edu")?.value || "",
         };
         // Add any additional entries if they exist
         const additionalEntries = Array.from(document.getElementsByClassName("education-entry"))
             .slice(1)
-            .map((entry) => {
-            var _a, _b, _c;
-            return ({
-                title: ((_a = entry.querySelector(".Title-edu")) === null || _a === void 0 ? void 0 : _a.value) || "",
-                description: ((_b = entry.querySelector(".Description-edu")) === null || _b === void 0 ? void 0 : _b.value) || "",
-                date: ((_c = entry.querySelector(".date-edu")) === null || _c === void 0 ? void 0 : _c.value) || "",
-            });
-        });
+            .map((entry) => ({
+            title: entry.querySelector(".Title-edu")?.value || "",
+            description: entry.querySelector(".Description-edu")
+                ?.value || "",
+            date: entry.querySelector(".date-edu")?.value || "",
+        }));
         // Combining all entries
         const allEducationEntries = [educationEntries, ...additionalEntries];
         //for adding education entries
@@ -276,21 +284,20 @@ document.addEventListener('click', (e) => {
             .join("");
         // Collecting Experience entries
         const experienceEntries = {
-            title: ((_d = document.getElementById("Title-exp")) === null || _d === void 0 ? void 0 : _d.value) || "",
-            description: ((_e = document.getElementById("Description-exp")) === null || _e === void 0 ? void 0 : _e.value) || "",
-            date: ((_f = document.getElementById("Date-exp")) === null || _f === void 0 ? void 0 : _f.value) || "",
+            title: document.getElementById("Title-exp")?.value || "",
+            description: document.getElementById("Description-exp")
+                ?.value || "",
+            date: document.getElementById("Date-exp")?.value || "",
         };
         // for adding entries if more than one
         const additionalExpEntries = Array.from(document.getElementsByClassName("experience-entry"))
             .slice(1)
-            .map((entry) => {
-            var _a, _b, _c;
-            return ({
-                title: ((_a = entry.querySelector(".Title-exp")) === null || _a === void 0 ? void 0 : _a.value) || "",
-                description: ((_b = entry.querySelector(".Description-exp")) === null || _b === void 0 ? void 0 : _b.value) || "",
-                date: ((_c = entry.querySelector(".Date-exp")) === null || _c === void 0 ? void 0 : _c.value) || "",
-            });
-        });
+            .map((entry) => ({
+            title: entry.querySelector(".Title-exp")?.value || "",
+            description: entry.querySelector(".Description-exp")
+                ?.value || "",
+            date: entry.querySelector(".Date-exp")?.value || "",
+        }));
         // Combineing all entries
         const allExperienceEntries = [experienceEntries, ...additionalExpEntries];
         // for the html of the experience entries
@@ -304,17 +311,14 @@ document.addEventListener('click', (e) => {
             .join("");
         // collecting service
         const services = {
-            service: ((_g = document.getElementById("service")) === null || _g === void 0 ? void 0 : _g.value) || "",
+            service: document.getElementById("service")?.value || "",
         };
         // for adding additional service entries if exist
         const additionalServices = Array.from(document.getElementsByClassName("service-entry"))
             .slice(1)
-            .map((entry) => {
-            var _a;
-            return ({
-                service: ((_a = entry.querySelector(".services")) === null || _a === void 0 ? void 0 : _a.value) || "",
-            });
-        });
+            .map((entry) => ({
+            service: entry.querySelector(".services")?.value || "",
+        }));
         // Combine all services
         const allServices = [services, ...additionalServices];
         // adding services
@@ -327,18 +331,15 @@ document.addEventListener('click', (e) => {
         // Collect skills similar to services
         const skills = [
             {
-                skill: ((_h = document.getElementById("Skill")) === null || _h === void 0 ? void 0 : _h.value) || "",
+                skill: document.getElementById("Skill")?.value || "",
             },
         ];
         // Add additional skill entries
         const additionalSkills = Array.from(document.getElementsByClassName("skill-entry"))
             .slice(1)
-            .map((entry) => {
-            var _a;
-            return ({
-                skill: ((_a = entry.querySelector(".skills")) === null || _a === void 0 ? void 0 : _a.value) || "",
-            });
-        });
+            .map((entry) => ({
+            skill: entry.querySelector(".skills")?.value || "",
+        }));
         // Combine all skills
         const allSkills = [...skills, ...additionalSkills];
         // Generate skills HTML
