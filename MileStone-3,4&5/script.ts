@@ -465,7 +465,7 @@ document.querySelector("#genRes")?.addEventListener("click", (e: Event) => {
           <p class="p1" contenteditable="true">
             <i class="material-icons icons1">call</i>${personalInfo.phone}
           </p>
-          <p class="p1" contenteditable="true">
+          <p class="p1" id="emailRes" contenteditable="true">
             <i class="material-icons icons1">email</i>${personalInfo.email}
           </p>
           </div>

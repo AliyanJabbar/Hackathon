@@ -9,6 +9,7 @@
 }
 .main {
   position: relative;
+  text-wrap: wrap;
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -87,6 +88,14 @@
   z-index: -1;
 }
 
+#emailRes{
+  text-wrap: wrap;
+  width: 90%;
+  word-break: break-all; 
+  display: flex; 
+  align-items: center; 
+}
+
 .p1 {
   padding: 9px;
   font-size: 15px;
@@ -95,11 +104,11 @@
 }
 
 .service .p1 {
-  cursor: default;
+  cursor: pointer;
   padding: 7px;
-  text-wrap: nowrap;
-  text-align: center;
-  width: fit-content;
+  text-wrap: wrap;
+  text-align: left;
+  width: 85%;
   border: 2px solid black;
   border-radius: 15px;
   margin: 4px;
@@ -111,9 +120,11 @@
 }
 
 .icons1 {
+  flex-shrink: 0;
+  margin-right: 5px;
   font-size: 16px !important;
   padding-right: 10px;
-  vertical-align: sub; /* for alignment */
+  vertical-align: sub;
 }
 
 .skills-container {
@@ -168,6 +179,8 @@
 }
 
 .name-div {
+  width: 80%;
+  text-wrap: wrap;
   padding: 50px;
   text-align: center;
   letter-spacing: 3px;
@@ -176,8 +189,6 @@
   font-size: 25px;
   font-weight: 700;
   font-family: sans-serif, "Courier New", Courier, monospace;
-  line-height: 0;
-  text-wrap: nowrap;
 }
 
 .name-div h1 {
